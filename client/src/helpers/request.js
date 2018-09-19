@@ -8,12 +8,20 @@ Request.prototype.get = function () {
 };
 
 Request.prototype.post = function (payload) {
+  console.log("payload" + payload);
+  console.log("payload json" + JSON.stringify(payload));
+  console.log(this.url)
   return fetch(this.url, {
     method: 'POST',
     body: JSON.stringify(payload),
-    headers: { 'Content-Type': 'application/json' }
+    headers: { 'Content-Type': 'application/json' },
+    mode: 'no-cors'
   })
-    .then((response) => response.json());
+    .then((response) => {
+      // console.log("response");
+      console.log(response.json());
+      return response.json();
+    })
 };
 
 Request.prototype.delete = function (id) {
